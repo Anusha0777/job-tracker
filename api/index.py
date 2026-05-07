@@ -207,7 +207,7 @@ def read_root():
     }
 
 
-@app.get("/health")
+@app.get("/api/health")
 def health_check():
     """Health check endpoint"""
     logger.info("Health check called")
@@ -216,7 +216,7 @@ def health_check():
 
 # Applications CRUD Endpoints
 
-@app.get("/applications", response_model=list[JobApplicationResponse])
+@app.get("/api/applications", response_model=list[JobApplicationResponse])
 def get_all_applications(db: Session = Depends(get_db)):
     """Get all job applications sorted by date (newest first)"""
     applications = db.query(JobApplication).order_by(
@@ -225,7 +225,7 @@ def get_all_applications(db: Session = Depends(get_db)):
     return applications
 
 
-@app.post("/applications", response_model=JobApplicationResponse)
+@app.post("/api/applications", response_model=JobApplicationResponse)
 def create_application(
     app: JobApplicationCreate,
     db: Session = Depends(get_db)
@@ -246,7 +246,7 @@ def create_application(
     return db_app
 
 
-@app.patch("/applications/{app_id}", response_model=JobApplicationResponse)
+@app.patch("/api/applications/{app_id}", response_model=JobApplicationResponse)
 def update_application_status(
     app_id: int,
     update: JobApplicationUpdate,
@@ -264,7 +264,7 @@ def update_application_status(
     return db_app
 
 
-@app.delete("/applications/{app_id}")
+@app.delete("/api/applications/{app_id}")
 def delete_application(app_id: int, db: Session = Depends(get_db)):
     """Delete a job application"""
     db_app = db.query(JobApplication).filter(JobApplication.id == app_id).first()
@@ -279,7 +279,7 @@ def delete_application(app_id: int, db: Session = Depends(get_db)):
 
 # Stats Endpoint
 
-@app.get("/stats", response_model=DashboardStats)
+@app.get("/api/stats", response_model=DashboardStats)
 def get_dashboard_stats(db: Session = Depends(get_db)):
     """Get dashboard statistics"""
     total = db.query(func.count(JobApplication.id)).scalar() or 0
@@ -311,7 +311,7 @@ def get_dashboard_stats(db: Session = Depends(get_db)):
 
 # AI Tip Endpoint
 
-@app.post("/ai-tip", response_model=AITipResponse)
+@app.post("/api/ai-tip", response_model=AITipResponse)
 def generate_resume_tip(request: AITipRequest):
     """Generate resume tips based on job description using Gemini API"""
     if not request.job_description.strip():
