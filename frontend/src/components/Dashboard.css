@@ -1,0 +1,276 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.dashboard-loading,
+.dashboard-error {
+  padding: 2rem;
+  text-align: center;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-loading {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.dashboard-error {
+  color: #d32f2f;
+  border: 2px solid #ffcdd2;
+  background: #ffebee;
+}
+
+.dashboard-error button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+.dashboard-error button:hover {
+  background: #b71c1c;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.75rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid #ccc;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card.total {
+  border-left-color: #667eea;
+}
+
+.stat-card.interview {
+  border-left-color: #fbc02d;
+}
+
+.stat-card.offer {
+  border-left-color: #4caf50;
+}
+
+.stat-card.rejected {
+  border-left-color: #f44336;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #999;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Chart Container */
+.chart-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.chart-container h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+/* Applications Section */
+.applications-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.applications-section h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+.empty-state {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: #999;
+  font-size: 1.05rem;
+  border: 2px dashed #ddd;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+/* Applications List */
+.applications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.application-card {
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: #fafafa;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.application-card:hover {
+  background: white;
+  border-color: #bbb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.app-info h3 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 0.3rem;
+}
+
+.app-role {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+}
+
+.app-date {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.app-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.status-select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease;
+}
+
+.status-select:hover,
+.status-select:focus {
+  border-color: #667eea;
+  outline: none;
+}
+
+.delete-btn {
+  padding: 0.5rem 1rem;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #d32f2f;
+}
+
+/* Status Badge */
+.status-badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-applied {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-interview {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.status-rejected {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.status-offer {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+  }
+
+  .app-header {
+    flex-direction: column;
+  }
+
+  .app-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .status-select,
+  .delete-btn {
+    width: 100%;
+  }
+}
