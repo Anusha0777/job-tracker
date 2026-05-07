@@ -15,7 +15,8 @@ logger = logging.getLogger(__name__)
 app = FastAPI(
     title="AI Job Application Tracker",
     description="Track job applications and get AI-powered resume tips",
-    version="1.0.0"
+    version="1.0.0",
+    root_path="/api"
 )
 
 # Enable CORS to allow requests from React frontend
