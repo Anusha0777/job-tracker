@@ -69,18 +69,6 @@ def health_check():
     return {"status": "healthy", "timestamp": datetime.now().isoformat()}
 
 
-@app.on_event("startup")
-async def startup_event():
-    """Log startup information"""
-    logger.info("=" * 50)
-    logger.info("🚀 AI Job Application Tracker Backend Starting")
-    logger.info(f"⏰ Started at: {datetime.now().isoformat()}")
-    logger.info(f"📍 Database: SQLite (job_tracker.db)")
-    logger.info(f"🌐 CORS Origins: localhost:3000, localhost:5173")
-    logger.info(f"📖 API Docs: http://localhost:8000/docs")
-    logger.info("=" * 50)
-
-
 # Mangum handler for Vercel
 from mangum import Mangum
 
