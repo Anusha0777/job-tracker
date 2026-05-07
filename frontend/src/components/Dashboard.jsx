@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 import { statsService, applicationService } from '../services/api';
 import './Dashboard.css';
 
@@ -60,17 +60,36 @@ export default function Dashboard() {
   if (error) {
     return (
       <div className="dashboard-error">
-        <p>{error}</p>
-        <button onClick={fetchData}>Retry</button>
+        <div className="error-content">
+          <h3>⚠️ Failed to load dashboard</h3>
+          <p>{error}</p>
+          <div className="error-details">
+            <p className="hint">
+              💡 Make sure the backend server is running at <code>http://localhost:8000</code>
+            </p>
+            <p className="hint">
+              💡 Check the browser console (F12) for more details
+            </p>
+          </div>
+          <button onClick={fetchData} className="retry-btn">↻ Retry</button>
+        </div>
       </div>
     );
   }
 
   // Prepare chart data
+  const statusColors = {
+    'Applied': '#007bff',
+    'Interview': '#ffc107',
+    'Offer': '#28a745',
+    'Rejected': '#dc3545'
+  };
+
   const chartData = stats?.by_status
     ? Object.entries(stats.by_status).map(([status, count]) => ({
         status,
         count,
+        fill: statusColors[status] || '#007bff'
       }))
     : [];
 
@@ -79,19 +98,19 @@ export default function Dashboard() {
       {/* Stats Cards */}
       <div className="stats-grid">
         <div className="stat-card total">
-          <div className="stat-label">Total Applications</div>
+          <div className="stat-label">📋 Total Applications</div>
           <div className="stat-value">{stats?.total_applications || 0}</div>
         </div>
         <div className="stat-card interview">
-          <div className="stat-label">Interviews</div>
+          <div className="stat-label">💬 Interviews</div>
           <div className="stat-value">{stats?.interviews || 0}</div>
         </div>
         <div className="stat-card offer">
-          <div className="stat-label">Offers</div>
+          <div className="stat-label">🎉 Offers</div>
           <div className="stat-value">{stats?.offers || 0}</div>
         </div>
         <div className="stat-card rejected">
-          <div className="stat-label">Rejected</div>
+          <div className="stat-label">❌ Rejected</div>
           <div className="stat-value">{stats?.rejected || 0}</div>
         </div>
       </div>
@@ -108,7 +127,11 @@ export default function Dashboard() {
               <Tooltip
                 contentStyle={{ backgroundColor: '#f9f9f9', border: '1px solid #ccc' }}
               />
-              <Bar dataKey="count" fill="#007bff" radius={[8, 8, 0, 0]} />
+              <Bar dataKey="count" radius={[8, 8, 0, 0]}>
+                {chartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.fill} />
+                ))}
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </div>

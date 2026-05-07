@@ -16,6 +16,7 @@ class JobApplicationCreate(BaseModel):
     company: str
     role: str
     application_date: datetime = None
+    status: str = "Applied"
 
 
 class JobApplicationUpdate(BaseModel):
@@ -74,7 +75,8 @@ def create_application(
     db_app = JobApplication(
         company=app.company,
         role=app.role,
-        application_date=app.application_date
+        application_date=app.application_date,
+        status=ApplicationStatus(app.status)
     )
     db.add(db_app)
     db.commit()

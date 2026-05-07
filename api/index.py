@@ -80,13 +80,18 @@ async def startup_event():
     logger.info("=" * 50)
 
 
+# Mangum handler for Vercel
+from mangum import Mangum
+
+handler = Mangum(app)
+
+
 if __name__ == "__main__":
     import uvicorn
 
     logger.info("Starting uvicorn server...")
-    # Auto-reload on code changes during development
     uvicorn.run(
-        "main:app",
+        "index:app",
         host="0.0.0.0",
         port=8000,
         reload=True,

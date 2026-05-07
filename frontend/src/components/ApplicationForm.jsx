@@ -8,6 +8,7 @@ export default function ApplicationForm({ onSuccess }) {
   const [applicationDate, setApplicationDate] = useState(
     new Date().toISOString().split('T')[0]
   );
+  const [status, setStatus] = useState('Applied');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -27,13 +28,15 @@ export default function ApplicationForm({ onSuccess }) {
       await applicationService.create(
         company.trim(),
         role.trim(),
-        new Date(applicationDate).toISOString()
+        new Date(applicationDate).toISOString(),
+        status
       );
 
       setSuccess(true);
       setCompany('');
       setRole('');
       setApplicationDate(new Date().toISOString().split('T')[0]);
+      setStatus('Applied');
 
       setTimeout(() => {
         setSuccess(false);
@@ -94,6 +97,21 @@ export default function ApplicationForm({ onSuccess }) {
               onChange={(e) => setApplicationDate(e.target.value)}
               disabled={loading}
             />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="status">Status</label>
+            <select
+              id="status"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              disabled={loading}
+            >
+              <option value="Applied">Applied</option>
+              <option value="Interview">Interview</option>
+              <option value="Offer">Offer</option>
+              <option value="Rejected">Rejected</option>
+            </select>
           </div>
 
           <button
