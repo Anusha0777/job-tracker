@@ -152,8 +152,7 @@ Return only the 3 bullet points, nothing else."""
 app = FastAPI(
     title="AI Job Application Tracker",
     description="Track job applications and get AI-powered resume tips",
-    version="1.0.0",
-    root_path="/api"
+    version="1.0.0"
 )
 
 # Enable CORS
