@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_BASE_URL = '/api';
+const API_BASE_URL = "https://job-tracker-s5hl.onrender.com";
 
 
 const REQUEST_TIMEOUT = 10000; // 10 seconds
